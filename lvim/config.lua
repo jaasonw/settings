@@ -55,6 +55,7 @@ lvim.plugins = {
   { "jose-elias-alvarez/null-ls.nvim" },
   { "MunifTanjim/prettier.nvim" },
   { "mrjones2014/nvim-ts-rainbow" },
+  { "AckslD/swenv.nvim" },
   {
     "olrtg/nvim-emmet",
     config = function()
@@ -74,10 +75,10 @@ lvim.plugins = {
     'wfxr/minimap.vim',
     build = "cargo install --locked code-minimap",
     -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-    config = function ()
-      vim.cmd ("let g:minimap_width = 10")
-      vim.cmd ("let g:minimap_auto_start = 1")
-      vim.cmd ("let g:minimap_auto_start_win_enter = 1")
+    config = function()
+      vim.cmd("let g:minimap_width = 10")
+      vim.cmd("let g:minimap_auto_start = 1")
+      vim.cmd("let g:minimap_auto_start_win_enter = 1")
     end,
   },
   {
@@ -85,6 +86,10 @@ lvim.plugins = {
     config = function()
       require("nvim-ts-autotag").setup()
     end,
+  },
+  {
+    "FeiyouG/commander.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" }
   },
 }
 require('neoscroll').setup()
@@ -99,6 +104,71 @@ formatters.setup {
   },
 }
 
+
+require("commander").add({
+  {
+    desc = "Open commander",
+    cmd = require("commander").show,
+    keys = { "n", "<C-p>" },
+    integration = {
+      telescope = {
+        enable = true,
+
+      },
+      lazy = {
+        enable = true,
+      },
+    },
+  }
+})
+
+
+
+-- GO LSP
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
+
+local lsp_manager = require "lvim.lsp.manager"
+lsp_manager.setup("golangci_lint_ls", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+
+lsp_manager.setup("gopls", {
+  on_attach = function(client, bufnr)
+    require("lvim.lsp").common_on_attach(client, bufnr)
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+    local map = function(mode, lhs, rhs, desc)
+      if desc then
+        desc = desc
+      end
+
+      vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+    end
+    map("n", "<leader>Ci", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
+    map("n", "<leader>Ct", "<cmd>GoMod tidy<cr>", "Tidy")
+    map("n", "<leader>Ca", "<cmd>GoTestAdd<Cr>", "Add Test")
+    map("n", "<leader>CA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
+    map("n", "<leader>Ce", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
+    map("n", "<leader>Cg", "<cmd>GoGenerate<Cr>", "Go Generate")
+    map("n", "<leader>Cf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
+    map("n", "<leader>Cc", "<cmd>GoCmt<Cr>", "Generate Comment")
+    map("n", "<leader>DT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
+  end,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+  settings = {
+    gopls = {
+      usePlaceholders = true,
+      gofumpt = true,
+      codelenses = {
+        generate = false,
+        gc_details = true,
+        test = true,
+        tidy = true,
+      },
+    },
+  },
+})
 
 
 --local lspconfig = require('lspconfig')
