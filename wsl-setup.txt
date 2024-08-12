@@ -1,0 +1,48 @@
+How to set up fedora on WSL
+
+1. Download the fedora container image: https://github.com/fedora-cloud/docker-brew-fedora/tree/40/x86_64. Download layer.tar
+  Note: This is fedora 40 at the time of writing but get the latest stable version because fedora changes all the time
+2. Make a home directory in POWERSHELL: mkdir $HOME\wsl\fedora
+3. Import the fedora container image: wsl --import fedora $HOME\wsl\fedora $HOME\Downloads\layer.tar
+4. Launch fedora as root: wsl -d fedora
+5. Set fedora as default wsl: wsl -s fedora
+6. IF DNS DOES NOT WORK
+  1. Set this if DNS does not work echo -e "[network]\ngenerateResolvConf = false" > /etc/wsl.conf
+  2. Exit and enter fedora again
+    - wsl -t fedora
+    - wsl -d fedora
+  3. In fedora: unlink /etc/resolv.conf
+  4. echo nameserver 1.1.1.1 > /etc/resolv.conf
+7. IF An error occurred mounting one of your file systems
+  1. dnf install -y util-linux
+  2. wsl -t fedora
+8. Create unprivilaged user
+  1. dnf install -y passwd cracklib-dicts
+  2. useradd -G wheel jasonw
+  3. passwd jasonw
+  4. wsl -d fedora -u jasonw
+  5. Check sudo functionality
+  6. Set default user: printf "\n[user]\ndefault = jasonw\n" | sudo tee -a /etc/wsl.conf
+  7. wsl -t fedora
+9. sudo dnf reinstall -y shadow-utils
+10. sudo dnf install -y procps-ng iputils
+11. sudo sysctl -w net.ipv4.ping_group_range="0 2000"
+12. Place the following in $HOME\.wslconfig (IN WINDOWS)
+    [wsl2]
+    kernelCommandLine = sysctl.net.ipv4.ping_group_range=\"0 2000\"
+13. sudo dnf -y install iproute findutils ncurses
+14. sudo dnf clean all
+
+How to update fedora on wsl
+
+Backup existing fedora install: wsl --export fedora $HOME\Downloads\fedora-wsl.tar
+
+Run the following
+
+sudo dnf upgrade --refresh
+sudo dnf install dnf-plugin-system-upgrade
+sudo dnf system-upgrade download --releasever=37
+export DNF_SYSTEM_UPGRADE_NO_REBOOT=1
+sudo -E dnf system-upgrade reboot
+sudo -E dnf system-upgrade upgrade
+sudo dnf upgrade --refresh
