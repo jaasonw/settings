@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Krypton";
+    src: url("https://monaspace.githubnext.com/_next/static/media/43c44ba9edb5e33f-s.p.woff2") format("woff2");
+    font-display: swap;
+    font-weight: 200 800;
+    font-style: oblique -11deg 0deg
+}
+
+@font-face {
+    font-family: "Neon";
+    src: url("https://github.com/githubnext/monaspace/raw/main/fonts/webfonts/MonaspaceNeon-Regular.woff2") format("woff2");
+    font-display: swap;
+    font-weight: 200 800;
+    font-style: oblique -11deg 0deg
+}

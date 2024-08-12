@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "ComicCode";
+  src: url("https://raw.githubusercontent.com/justinstitt/settings/main/comic-code/patched-nerd-font/Comic%20Code%20Ligatures%20Medium%20Nerd%20Font%20Complete.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: "Krypton";
+    src: url("https://monaspace.githubnext.com/_next/static/media/43c44ba9edb5e33f-s.p.woff2") format("woff2");
+    font-display: swap;
+    font-weight: 200 800;
+    font-style: oblique -11deg 0deg
+}
