@@ -41,7 +41,7 @@ lvim.plugins = {
     name = "catppuccin",
     priority = 1000
   },
-  { "github/copilot.vim" },
+  -- { "github/copilot.vim" },
   { "karb94/neoscroll.nvim" },
   { "mattn/emmet-vim" },
   { "neovim/nvim-lspconfig" },
@@ -56,6 +56,12 @@ lvim.plugins = {
   { "MunifTanjim/prettier.nvim" },
   { "mrjones2014/nvim-ts-rainbow" },
   { "AckslD/swenv.nvim" },
+  {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup()
+    end,
+  },
   {
     "olrtg/nvim-emmet",
     config = function()
@@ -120,6 +126,18 @@ require("commander").add({
       },
     },
   }
+})
+
+table.insert(lvim.plugins, {
+  "zbirenbaum/copilot-cmp",
+  event = "InsertEnter",
+  dependencies = { "zbirenbaum/copilot.lua" },
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+      require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+    end, 100)
+  end,
 })
 
 
