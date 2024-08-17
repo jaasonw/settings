@@ -56,10 +56,6 @@ lvim.plugins = {
     name = "catppuccin",
     priority = 1000
   },
-<<<<<<< Updated upstream
-  -- { "github/copilot.vim" },
-=======
->>>>>>> Stashed changes
   { "karb94/neoscroll.nvim" },
   { "mattn/emmet-vim" },
   { "neovim/nvim-lspconfig" },
@@ -98,11 +94,7 @@ lvim.plugins = {
   {
     'wfxr/minimap.vim',
     build = "cargo install --locked code-minimap",
-<<<<<<< Updated upstream
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-=======
     cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
->>>>>>> Stashed changes
     config = function()
       vim.cmd("let g:minimap_width = 10")
       vim.cmd("let g:minimap_auto_start = 1")
@@ -119,18 +111,6 @@ lvim.plugins = {
     "FeiyouG/commander.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" }
   },
-<<<<<<< Updated upstream
-=======
-  {
-    'prettier/vim-prettier',
-    build = 'yarn install --frozen-lockfile --production',
-    branch = 'release/0.x',
-    ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
-    config = function()
-      vim.cmd('let g:prettier#autoformat = 1')
-    end,
-  }
->>>>>>> Stashed changes
 }
 require('neoscroll').setup()
 require('numb').setup()
