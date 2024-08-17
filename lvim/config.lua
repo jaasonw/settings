@@ -1,4 +1,3 @@
--- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
 lvim.colorscheme = "catppuccin-macchiato"
@@ -11,6 +10,22 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.telescope = {
+  active = true,
+  defaults = {
+    layout_strategy = "horizontal",
+  },
+  pickers = {
+    git_files = {
+      hidden = true,
+    },
+    live_grep = {
+      hidden = true,
+    },
+  },
+}
+
+vim.opt.timeoutlen = 100
 
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -41,7 +56,10 @@ lvim.plugins = {
     name = "catppuccin",
     priority = 1000
   },
+<<<<<<< Updated upstream
   -- { "github/copilot.vim" },
+=======
+>>>>>>> Stashed changes
   { "karb94/neoscroll.nvim" },
   { "mattn/emmet-vim" },
   { "neovim/nvim-lspconfig" },
@@ -80,7 +98,11 @@ lvim.plugins = {
   {
     'wfxr/minimap.vim',
     build = "cargo install --locked code-minimap",
+<<<<<<< Updated upstream
     -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+=======
+    cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+>>>>>>> Stashed changes
     config = function()
       vim.cmd("let g:minimap_width = 10")
       vim.cmd("let g:minimap_auto_start = 1")
@@ -97,19 +119,109 @@ lvim.plugins = {
     "FeiyouG/commander.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" }
   },
+<<<<<<< Updated upstream
+=======
+  {
+    'prettier/vim-prettier',
+    build = 'yarn install --frozen-lockfile --production',
+    branch = 'release/0.x',
+    ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+    config = function()
+      vim.cmd('let g:prettier#autoformat = 1')
+    end,
+  }
+>>>>>>> Stashed changes
 }
 require('neoscroll').setup()
 require('numb').setup()
 require('nvim-lastplace').setup()
 
-local formatters = require("lvim.lsp.null-ls.formatters")
-formatters.setup {
-  {
-    command = "prettier",
-    filetypes = { "javascript", "typescript", "css", "scss", "html", "json", "yaml", "markdown" },
-  },
-}
 
+require("commander").add({
+  {
+    desc = "Open commander",
+    cmd = require("commander").show,
+    keys = { "n", "<C-p>" },
+    integration = {
+      telescope = {
+        enable = true,
+
+      },
+      lazy = {
+        enable = true,
+      },
+    },
+  }
+})
+
+table.insert(lvim.plugins, {
+  "zbirenbaum/copilot-cmp",
+  event = "InsertEnter",
+  dependencies = { "zbirenbaum/copilot.lua" },
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+      require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+    end, 100)
+  end,
+})
+
+-- lvim.builtin.which_key.mappings["m"] = {
+--   name = "Minimap",
+--   m = { "<cmd>MinimapToggle<cr>", "MinimapToggle" },
+--   r = { "<cmd>MinimapRefresh<cr>", "MinimapRefresh" },
+--   c = { "<cmd>MinimapClose<cr>", "MinimapClose" },
+--   u = { "<cmd>MinimapUpdateHighlight<cr>", "MinimapUpdateHighlight" },
+-- }
+
+
+
+
+-- GO LSP
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
+
+local lsp_manager = require "lvim.lsp.manager"
+lsp_manager.setup("golangci_lint_ls", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+
+lsp_manager.setup("gopls", {
+  on_attach = function(client, bufnr)
+    require("lvim.lsp").common_on_attach(client, bufnr)
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+    local map = function(mode, lhs, rhs, desc)
+      if desc then
+        desc = desc
+      end
+
+      vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+    end
+    map("n", "<leader>Ci", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
+    map("n", "<leader>Ct", "<cmd>GoMod tidy<cr>", "Tidy")
+    map("n", "<leader>Ca", "<cmd>GoTestAdd<Cr>", "Add Test")
+    map("n", "<leader>CA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
+    map("n", "<leader>Ce", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
+    map("n", "<leader>Cg", "<cmd>GoGenerate<Cr>", "Go Generate")
+    map("n", "<leader>Cf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
+    map("n", "<leader>Cc", "<cmd>GoCmt<Cr>", "Generate Comment")
+    map("n", "<leader>DT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
+  end,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+  settings = {
+    gopls = {
+      usePlaceholders = true,
+      gofumpt = true,
+      codelenses = {
+        generate = false,
+        gc_details = true,
+        test = true,
+        tidy = true,
+      },
+    },
+  },
+})
 
 require("commander").add({
   {
