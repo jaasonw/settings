@@ -94,7 +94,7 @@ lvim.plugins = {
   {
     'wfxr/minimap.vim',
     build = "cargo install --locked code-minimap",
-    cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+    cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
     config = function()
       vim.cmd("let g:minimap_width = 10")
       vim.cmd("let g:minimap_auto_start = 1")
@@ -146,16 +146,13 @@ table.insert(lvim.plugins, {
   end,
 })
 
--- lvim.builtin.which_key.mappings["m"] = {
---   name = "Minimap",
---   m = { "<cmd>MinimapToggle<cr>", "MinimapToggle" },
---   r = { "<cmd>MinimapRefresh<cr>", "MinimapRefresh" },
---   c = { "<cmd>MinimapClose<cr>", "MinimapClose" },
---   u = { "<cmd>MinimapUpdateHighlight<cr>", "MinimapUpdateHighlight" },
--- }
-
-
-
+lvim.builtin.which_key.mappings["m"] = {
+  name = "Minimap",
+  m = { "<cmd>MinimapToggle<cr>", "MinimapToggle" },
+  r = { "<cmd>MinimapRefresh<cr>", "MinimapRefresh" },
+  c = { "<cmd>MinimapClose<cr>", "MinimapClose" },
+  u = { "<cmd>MinimapUpdateHighlight<cr>", "MinimapUpdateHighlight" },
+}
 
 -- GO LSP
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
