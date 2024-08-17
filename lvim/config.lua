@@ -10,6 +10,42 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope commands<cr>"
+lvim.keys.normal_mode["<C-f>"] = "<cmd>Telescope live_grep<cr>"
+
+-- Disable D copying to clipboard (use x)
+vim.keymap.set("n", "d", '"_d')
+vim.keymap.set("n", "D", '"_D')
+vim.keymap.set("v", "d", '"_d')
+
+
+-- which_key mappings
+lvim.builtin.which_key.mappings["<Tab>"] = { "<cmd>b#<CR>", "Previous Buffer" }
+
+-- Minimap settings
+lvim.builtin.which_key.mappings["m"] = {
+  name = "Minimap",
+  m = { "<cmd>MinimapToggle<cr>", "MinimapToggle" },
+  r = { "<cmd>MinimapRefresh<cr>", "MinimapRefresh" },
+  c = { "<cmd>MinimapClose<cr>", "MinimapClose" },
+  u = { "<cmd>MinimapUpdateHighlight<cr>", "MinimapUpdateHighlight" },
+}
+
+-- Telescope keybinds
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Telescope",
+  g = {
+    name = "Git",
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
+    s = { "<cmd>Telescope git_status<cr>", "Git Status" },
+  },
+}
+
+-- this is just to make the which_key menu show up faster
+vim.opt.timeoutlen = 100
+
+-- telescope settings, makes the layout sideways
 lvim.builtin.telescope = {
   active = true,
   defaults = {
@@ -24,8 +60,6 @@ lvim.builtin.telescope = {
     },
   },
 }
-
-vim.opt.timeoutlen = 100
 
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -107,33 +141,14 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
-  {
-    "FeiyouG/commander.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" }
-  },
 }
 require('neoscroll').setup()
 require('numb').setup()
 require('nvim-lastplace').setup()
 
 
-require("commander").add({
-  {
-    desc = "Open commander",
-    cmd = require("commander").show,
-    keys = { "n", "<C-p>" },
-    integration = {
-      telescope = {
-        enable = true,
-
-      },
-      lazy = {
-        enable = true,
-      },
-    },
-  }
-})
-
+-- Copilot extension that isnt aids like the github one
+-- puts the copilot suggestions in the autocomplete instead of fighting the lsp all the fucking time
 table.insert(lvim.plugins, {
   "zbirenbaum/copilot-cmp",
   event = "InsertEnter",
@@ -146,14 +161,10 @@ table.insert(lvim.plugins, {
   end,
 })
 
-lvim.builtin.which_key.mappings["m"] = {
-  name = "Minimap",
-  m = { "<cmd>MinimapToggle<cr>", "MinimapToggle" },
-  r = { "<cmd>MinimapRefresh<cr>", "MinimapRefresh" },
-  c = { "<cmd>MinimapClose<cr>", "MinimapClose" },
-  u = { "<cmd>MinimapUpdateHighlight<cr>", "MinimapUpdateHighlight" },
-}
 
+
+-- General LSP settings
+-- Auto hover setup
 -- GO LSP
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
 
@@ -200,22 +211,6 @@ lsp_manager.setup("gopls", {
   },
 })
 
-require("commander").add({
-  {
-    desc = "Open commander",
-    cmd = require("commander").show,
-    keys = { "n", "<C-p>" },
-    integration = {
-      telescope = {
-        enable = true,
-
-      },
-      lazy = {
-        enable = true,
-      },
-    },
-  }
-})
 
 table.insert(lvim.plugins, {
   "zbirenbaum/copilot-cmp",
@@ -287,3 +282,4 @@ lsp_manager.setup("gopls", {
 --    end
 --  end
 --}
+
