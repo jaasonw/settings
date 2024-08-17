@@ -11,7 +11,13 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope commands<cr>"
-lvim.keys.normal_mode["<C-f>"] = "<cmd>Telescope live_grep<cr>"
+
+
+-- control f for normal find
+lvim.keys.normal_mode["<c-f>"] = "<cmd>Telescope current_buffer_fuzzy_find<cr>"
+
+-- ctrl shift f for better find
+lvim.keys.normal_mode["<c-g>"] = "<cmd>Telescope live_grep<cr>"
 
 -- Disable D copying to clipboard (use x)
 vim.keymap.set("n", "d", '"_d')
@@ -40,7 +46,23 @@ lvim.builtin.which_key.mappings["t"] = {
     c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
     s = { "<cmd>Telescope git_status<cr>", "Git Status" },
   },
+  l = {
+    name = "LSP",
+    d = { "<cmd>Telescope lsp_definitions<cr>", "Definitions" },
+    r = { "<cmd>Telescope lsp_references<cr>", "References" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    w = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols" },
+  },
+  f = {
+    name = "Find",
+    f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+    g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
+    r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+  }
 }
+
+lvim.builtin.which_key.mappings["W"] = { function() require('nvim-emmet').wrap_with_abbreviation() end, "Emmet Wrap" }
+
 
 -- this is just to make the which_key menu show up faster
 vim.opt.timeoutlen = 100
@@ -113,7 +135,7 @@ lvim.plugins = {
   {
     "olrtg/nvim-emmet",
     config = function()
-      vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+      -- vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
     end,
   },
   {
@@ -282,4 +304,3 @@ lsp_manager.setup("gopls", {
 --    end
 --  end
 --}
-
