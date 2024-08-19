@@ -48,6 +48,7 @@ lvim.builtin.which_key.mappings["t"] = {
   },
   l = {
     name = "LSP",
+    a = { "<cmd>lua require('actions-preview').code_actions()<cr>", "Actions" },
     d = { "<cmd>Telescope lsp_definitions<cr>", "Definitions" },
     r = { "<cmd>Telescope lsp_references<cr>", "References" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
@@ -61,7 +62,7 @@ lvim.builtin.which_key.mappings["t"] = {
   }
 }
 
-lvim.builtin.which_key.mappings["W"] = { function() require('nvim-emmet').wrap_with_abbreviation() end, "Emmet Wrap" }
+-- lvim.builtin.which_key.mappings["W"] = { function() require('nvim-emmet').wrap_with_abbreviation() end, "Emmet Wrap" }
 
 
 -- this is just to make the which_key menu show up faster
@@ -125,6 +126,20 @@ lvim.plugins = {
   { "jose-elias-alvarez/null-ls.nvim" },
   { "MunifTanjim/prettier.nvim" },
   { "mrjones2014/nvim-ts-rainbow" },
+  {
+    "aznhe21/actions-preview.nvim",
+    config = function()
+      -- vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+    end,
+  },
+  {
+    "tpope/vim-surround",
+
+    -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+    -- setup = function()
+    --  vim.o.timeoutlen = 500
+    -- end
+  },
   { "AckslD/swenv.nvim" },
   {
     "Pocco81/auto-save.nvim",
@@ -132,12 +147,12 @@ lvim.plugins = {
       require("auto-save").setup()
     end,
   },
-  {
-    "olrtg/nvim-emmet",
-    config = function()
-      -- vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
-    end,
-  },
+  -- {
+  --   "olrtg/nvim-emmet",
+  --   config = function()
+  --     -- vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+  --   end,
+  -- },
   {
     "smoka7/hop.nvim",
     event = "BufRead",
@@ -167,6 +182,16 @@ lvim.plugins = {
 require('neoscroll').setup()
 require('numb').setup()
 require('nvim-lastplace').setup()
+
+
+
+require("actions-preview").setup {
+  diff = {
+    algorithm = "patience",
+    ignore_whitespace = true,
+  },
+  telescope = require("telescope.themes").get_dropdown { winblend = 10 },
+}
 
 
 -- Copilot extension that isnt aids like the github one
