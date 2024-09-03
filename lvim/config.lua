@@ -24,9 +24,9 @@ vim.keymap.set("n", "d", '"_d')
 vim.keymap.set("n", "D", '"_D')
 vim.keymap.set("v", "d", '"_d')
 
-
 -- which_key mappings
 lvim.builtin.which_key.mappings["<Tab>"] = { "<cmd>b#<CR>", "Previous Buffer" }
+lvim.builtin.which_key.mappings["<F5>"] = { "<cmd>UndotreeToggle<cr>", "Toggle UndoTree" }
 
 -- Minimap settings
 lvim.builtin.which_key.mappings["m"] = {
@@ -99,7 +99,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
@@ -126,6 +125,7 @@ lvim.plugins = {
   { "jose-elias-alvarez/null-ls.nvim" },
   { "MunifTanjim/prettier.nvim" },
   { "mrjones2014/nvim-ts-rainbow" },
+  { 'mbbill/undotree' },
   {
     "aznhe21/actions-preview.nvim",
     config = function()
@@ -178,6 +178,21 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
+  {
+    'KadoBOT/nvim-spotify',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    build = 'make',
+    config = function()
+      local spotify = require 'nvim-spotify'
+
+      spotify.setup {
+        status = {
+          update_interval = 10000, -- interval (ms) to check for currently playing
+          format = '%s %t by %a'   -- format for spotify-tui
+        }
+      }
+    end
+  }
 }
 require('neoscroll').setup()
 require('numb').setup()
@@ -318,3 +333,45 @@ lsp_manager.setup("gopls", {
     },
   },
 })
+
+if vim.fn.executable("spt") == 1 then
+  local spotify = require 'nvim-spotify'
+  local status = spotify.status
+
+  status:start() -- Start the status listener
+
+  -- Customize LunarVim's lualine configuration
+  lvim.builtin.lualine.sections.lualine_x = {
+    status.listen -- Add Spotify's status to lualine
+  }
+
+  -- Additional nvim-spotify setup if needed
+  spotify.setup {
+    status = {
+      update_interval = 10000, -- Interval to check for currently playing
+      format = '%s %t by %a'   -- Format for displaying track info
+    }
+  }
+else
+  -- Optionally, you can add a message here to notify the user
+  vim.notify("Spotify TUI (spt) not found, nvim-spotify not activated.", vim.log.levels.WARN)
+end
+
+
+
+
+--local lspconfig = require('lspconfig')
+--lspconfig.pyright.setup {
+--  on_new_config = function(config, root_dir)
+--    local env = vim.trim(vim.fn.system('cd "' .. root_dir .. '"; poetry env info -p 2>/dev/null'))
+--    if string.len(env) > 0 then
+--      config.settings.python.pythonPath = env .. '/bin/python'
+--    end
+--  end
+--}
+--}
+--}
+--}
+--}
+--}
+--}
