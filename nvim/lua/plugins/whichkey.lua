@@ -48,6 +48,7 @@ return {
       { '<leader>w', group = '+Workspace' },
       { '<leader>t', group = '+Telescope' },
       { '<leader>x', group = '+Trouble' },
+      { '<leader>g', group = '+Git' },
     },
   },
 }

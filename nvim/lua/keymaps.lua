@@ -33,3 +33,5 @@ end, { desc = 'Undotree' })
 vim.keymap.set('n', 'd', '"_d')
 vim.keymap.set('n', 'D', '"_D')
 vim.keymap.set('v', 'd', '"_d')
+
+vim.keymap.set('n', '<Leader>gg', '<cmd>LazyGit<CR>', { desc = 'LazyGit' })

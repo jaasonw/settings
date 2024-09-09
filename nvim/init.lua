@@ -43,6 +43,8 @@ vim.notify = require 'notify'
 require('neoscroll').setup()
 require('numb').setup()
 require('nvim-lastplace').setup()
+require('scrollbar').setup()
+require('auto-session').setup {}
 
 if vim.fn.executable 'spt' == 1 then
   local spotify = require 'nvim-spotify'
