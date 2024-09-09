@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require 'plugins'
 
 -- set theme
-vim.cmd.colorscheme 'tokyonight-night'
+vim.cmd.colorscheme 'catppuccin'
 
 -- load config for those plugins
 require 'config'
