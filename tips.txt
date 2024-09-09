@@ -1,0 +1,3 @@
+Copy current nvim config to this repo
+
+rsync -rtv  ~/.config/nvim .

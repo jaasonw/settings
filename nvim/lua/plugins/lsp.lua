@@ -4,7 +4,7 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim',       opts = {} },
+    { 'j-hui/fidget.nvim', opts = {} },
     'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
@@ -25,7 +25,7 @@ return {
         map('<leader>ls', require('telescope.builtin').lsp_document_symbols, 'Document [S]ymbols')
         map('<leader>lS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace [S]ymbols')
         map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
-        map('<leader>la', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
+        -- map('<leader>la', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
 
         -- Highlight word under cursor
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -53,11 +53,11 @@ return {
         end
 
         -- Vscode ErrorLens
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-          map('<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-          end, '[T]oggle Inlay [H]ints')
-        end
+        -- if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        --   map('<leader>th', function()
+        --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+        --   end, '[T]oggle Inlay [H]ints')
+        -- end
       end,
     })
 
@@ -117,7 +117,7 @@ return {
 
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua',   -- Used to format Lua code
+      'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

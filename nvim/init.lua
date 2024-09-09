@@ -20,6 +20,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+vim.opt.tabstop = 2
 
 -- Sync clipboard with os
 vim.schedule(function()
@@ -34,42 +35,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- the order for this crap actually matters as much as i would like to just put the theme at the top
+
+-- load plugins
 require 'plugins'
 
 -- set theme
 vim.cmd.colorscheme 'tokyonight-night'
 
-vim.notify = require 'notify'
-require('neoscroll').setup()
-require('numb').setup()
-require('nvim-lastplace').setup()
-require('scrollbar').setup()
-require('auto-session').setup {}
-
-if vim.fn.executable 'spt' == 1 then
-  local spotify = require 'nvim-spotify'
-  spotify.setup {
-    status = {
-      update_interval = 10000, -- Interval to check for currently playing
-      format = '%s %t by %a', -- Format for displaying track info
-    },
-  }
-
-  local status = require('nvim-spotify').status
-
-  status:start()
-
-  require('lualine').setup {
-    sections = {
-      lualine_x = {
-        status.listen,
-      },
-    },
-  }
-else
-  -- Optionally, you can add a message here to notify the user
-  vim.notify('Spotify TUI (spt) not found, nvim-spotify not activated.', vim.log.levels.WARN)
-end
+-- load config for those plugins
+require 'config'
 
 -- load keymaps last as to avoid any conflicts
 require 'keymaps'

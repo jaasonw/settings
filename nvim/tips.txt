@@ -1,0 +1,9 @@
+find and replace and then append to end of line it was found on
+%s/FOO/BAR/ | '<,'>s/$/APPEND/ | noh
+
+operate on every line in a file
+:%norm csw"A: ""
+Explanation:
+%norm applies to every file
+csw": Change surround word with "
+A: Append mode end of line
