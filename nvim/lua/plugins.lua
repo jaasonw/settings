@@ -19,6 +19,7 @@ require('lazy').setup({
   require 'plugins.comment',
   require 'plugins.copilot',
   require 'plugins.gitsigns',
+  require 'plugins.hlslens',
   require 'plugins.hop',
   require 'plugins.indent_line',
   require 'plugins.lazydev',
