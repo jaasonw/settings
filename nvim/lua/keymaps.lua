@@ -27,6 +27,9 @@ vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selected lines u
 vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { desc = 'Move current line down' })
 vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move current line up' })
 
+vim.keymap.set('n', '<A-l>', ':bnext<cr>', { desc = 'Next Buffer', silent = true })
+vim.keymap.set('n', '<A-h>', ':bprev<cr>', { desc = 'Previous Buffer', silent = true })
+
 -- undotree
 vim.keymap.set('n', '<Leader>u', function()
   vim.cmd 'UndotreeToggle'
@@ -48,8 +51,8 @@ vim.keymap.set('n', '<leader>sC', '<cmd> Telescope commands<cr>', { desc = 'Comm
 vim.keymap.set('n', '<leader>sh', '<cmd> Telescope help_tags<cr>', { desc = 'Help' })
 vim.keymap.set('n', '<leader>sk', '<cmd> Telescope keymaps<cr>', { desc = 'Keymaps' })
 vim.keymap.set('n', '<leader>ss', '<cmd> Telescope session-lens<cr>', { desc = 'Session' })
-vim.keymap.set('n', '<leader>sw', '<cmd> Telescope grep_string<cr>', { desc = 'current Word' })
-vim.keymap.set('n', '<leader>sg', '<cmd> Telescope live_grep<cr>', { desc = 'by Grep' })
+vim.keymap.set('n', '<leader>sw', '<cmd> Telescope grep_string<cr>', { desc = 'Current Word' })
+vim.keymap.set('n', '<leader>sg', '<cmd> Telescope live_grep<cr>', { desc = 'Live Grep' })
 vim.keymap.set('n', '<leader>sd', '<cmd> Telescope diagnostics<cr>', { desc = 'Diagnostics' })
 vim.keymap.set('n', '<leader>sr', '<cmd> Telescope resume<cr>', { desc = 'Resume' })
 vim.keymap.set('n', '<leader>s.', '<cmd> Telescope oldfiles<cr>', { desc = 'Recent Files ("." for repeat)' })
@@ -63,4 +66,4 @@ end, { desc = 'Search in Open Files' })
 
 vim.keymap.set('n', '<leader>sn', function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
-end, { desc = 'Search Neovim files' })
+end, { desc = 'Config' })

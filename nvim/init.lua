@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require 'plugins'
 
 -- set theme
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'catppuccin-mocha'
 
 -- load config for those plugins
 require 'config'
