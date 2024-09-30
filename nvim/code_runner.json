@@ -1,0 +1,8 @@
+{
+  "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+  "cpp": "cd $dir && g++ $fileName -g -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
+  "c": "cd $dir && g $fileName -g -Wall -o $fileNameWithoutExt && echo ------ && $dir/$fileNameWithoutExt",
+  "python": "python3 -u",
+  "typescript": "node run",
+  "rust": "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt"
+}

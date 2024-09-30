@@ -44,7 +44,8 @@ return {
     spec = {
       { '<leader>l', group = '+Lsp' },
       { '<leader>b', group = '+Buffers' },
-      { '<leader>r', group = '+Rename' },
+      { '<leader>c', group = '+ChatGPT' },
+      { '<leader>r', group = '+Replace' },
       { '<leader>s', group = '+Search' },
       { '<leader>w', group = '+Workspace' },
       { '<leader>t', group = '+Telescope' },

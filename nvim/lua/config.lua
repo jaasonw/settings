@@ -4,6 +4,12 @@ require('numb').setup()
 require('nvim-lastplace').setup()
 require('scrollbar').setup()
 require('auto-session').setup {}
+require('copilot').setup()
+require('code_runner').setup {
+  mode = 'toggleterm',
+  filetype_path = vim.fn.expand '~/.config/nvim/code_runner.json',
+  project_path = vim.fn.expand '~/.config/nvim/projects.json',
+}
 
 if vim.fn.executable 'spt' == 1 then
   local spotify = require 'nvim-spotify'

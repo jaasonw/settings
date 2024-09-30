@@ -21,6 +21,11 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.tabstop = 2
+vim.opt.pumheight = 10
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Sync clipboard with os
 vim.schedule(function()

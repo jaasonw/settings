@@ -1,4 +1,3 @@
--- keymaps move to another file later idk
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear highlights' })
 vim.keymap.set('n', '<Leader>h', '<cmd>nohlsearch<CR>', { desc = 'Clear highlights' })
 vim.keymap.set('n', '<Leader><Tab>', '<cmd>b#<CR>', { desc = 'Previous Buffer' })
@@ -20,6 +19,11 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = '
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move to the top window' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move to the right window' })
 vim.keymap.set('n', '<Leader>la', '<cmd>lua require("actions-preview").code_actions()<cr>', { desc = 'Code Actions' })
+
+-- replace commands
+vim.keymap.set('n', '<Leader>ra', ':%s/', { desc = 'Replace all' })
+vim.keymap.set('n', '<Leader>rr', ':s/', { desc = 'Replace in current line' })
+vim.keymap.set('v', '<Leader>r', ':s/', { desc = 'Replace in selection' })
 
 -- Move lines up and down
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
@@ -56,6 +60,32 @@ vim.keymap.set('n', '<leader>sg', '<cmd> Telescope live_grep<cr>', { desc = 'Liv
 vim.keymap.set('n', '<leader>sd', '<cmd> Telescope diagnostics<cr>', { desc = 'Diagnostics' })
 vim.keymap.set('n', '<leader>sr', '<cmd> Telescope resume<cr>', { desc = 'Resume' })
 vim.keymap.set('n', '<leader>s.', '<cmd> Telescope oldfiles<cr>', { desc = 'Recent Files ("." for repeat)' })
+
+-- chatgpt keybinds
+vim.keymap.set('n', '<leader>c', '<cmd>ChatGPT<CR>', { desc = 'ChatGPT' })
+vim.keymap.set('n', '<leader>ce', '<cmd>ChatGPTEditWithInstruction<CR>', { desc = 'Edit with instruction' })
+vim.keymap.set('v', '<leader>ce', '<cmd>ChatGPTEditWithInstruction<CR>', { desc = 'Edit with instruction' })
+vim.keymap.set('n', '<leader>cg', '<cmd>ChatGPTRun grammar_correction<CR>', { desc = 'Grammar Correction' })
+vim.keymap.set('v', '<leader>cg', '<cmd>ChatGPTRun grammar_correction<CR>', { desc = 'Grammar Correction' })
+vim.keymap.set('n', '<leader>ct', '<cmd>ChatGPTRun translate<CR>', { desc = 'Translate' })
+vim.keymap.set('v', '<leader>ct', '<cmd>ChatGPTRun translate<CR>', { desc = 'Translate' })
+vim.keymap.set('n', '<leader>ck', '<cmd>ChatGPTRun keywords<CR>', { desc = 'Keywords' })
+vim.keymap.set('v', '<leader>ck', '<cmd>ChatGPTRun keywords<CR>', { desc = 'Keywords' })
+vim.keymap.set('n', '<leader>cd', '<cmd>ChatGPTRun docstring<CR>', { desc = 'Docstring' })
+vim.keymap.set('v', '<leader>cd', '<cmd>ChatGPTRun docstring<CR>', { desc = 'Docstring' })
+vim.keymap.set('n', '<leader>ca', '<cmd>ChatGPTRun add_tests<CR>', { desc = 'Add Tests' })
+vim.keymap.set('v', '<leader>ca', '<cmd>ChatGPTRun add_tests<CR>', { desc = 'Add Tests' })
+vim.keymap.set('v', '<leader>co', '<cmd>ChatGPTRun optimize_code<CR>', { desc = 'Optimize Code' })
+vim.keymap.set('n', '<leader>cs', '<cmd>ChatGPTRun summarize<CR>', { desc = 'Summarize' })
+vim.keymap.set('v', '<leader>cs', '<cmd>ChatGPTRun summarize<CR>', { desc = 'Summarize' })
+vim.keymap.set('n', '<leader>cf', '<cmd>ChatGPTRun fix_bugs<CR>', { desc = 'Fix Bugs' })
+vim.keymap.set('v', '<leader>cf', '<cmd>ChatGPTRun fix_bugs<CR>', { desc = 'Fix Bugs' })
+vim.keymap.set('n', '<leader>cx', '<cmd>ChatGPTRun explain_code<CR>', { desc = 'Explain Code' })
+vim.keymap.set('v', '<leader>cx', '<cmd>ChatGPTRun explain_code<CR>', { desc = 'Explain Code' })
+vim.keymap.set('n', '<leader>cr', '<cmd>ChatGPTRun roxygen_edit<CR>', { desc = 'Roxygen Edit' })
+vim.keymap.set('v', '<leader>cr', '<cmd>ChatGPTRun roxygen_edit<CR>', { desc = 'Roxygen Edit' })
+vim.keymap.set('n', '<leader>cl', '<cmd>ChatGPTRun code_readability_analysis<CR>', { desc = 'Code Readability Analysis' })
+vim.keymap.set('v', '<leader>cl', '<cmd>ChatGPTRun code_readability_analysis<CR>', { desc = 'Code Readability Analysis' })
 
 vim.keymap.set('n', '<leader>s/', function()
   require('telescope.builtin').live_grep {
