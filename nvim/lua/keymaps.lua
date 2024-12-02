@@ -34,6 +34,10 @@ vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move current line up' })
 vim.keymap.set('n', '<A-l>', ':bnext<cr>', { desc = 'Next Buffer', silent = true })
 vim.keymap.set('n', '<A-h>', ':bprev<cr>', { desc = 'Previous Buffer', silent = true })
 
+-- Indentation
+vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true, silent = true })
+
 -- undotree
 vim.keymap.set('n', '<Leader>u', function()
   vim.cmd 'UndotreeToggle'
