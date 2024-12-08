@@ -98,6 +98,14 @@ vim.keymap.set('n', '<leader>s/', function()
   }
 end, { desc = 'Search in Open Files' })
 
+vim.keymap.set('n', '<leader>n', function()
+  if vim.wo.relativenumber then
+    vim.wo.relativenumber = false
+  else
+    vim.wo.relativenumber = true
+  end
+end, { desc = 'Toggle relative line numbers' })
+
 vim.keymap.set('n', '<leader>sn', function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = 'Config' })
