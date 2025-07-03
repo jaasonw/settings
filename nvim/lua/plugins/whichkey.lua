@@ -44,13 +44,13 @@ return {
     spec = {
       { '<leader>l', group = '+Lsp' },
       { '<leader>b', group = '+Buffers' },
-      { '<leader>c', group = '+ChatGPT' },
       { '<leader>r', group = '+Replace' },
       { '<leader>s', group = '+Search' },
       { '<leader>w', group = '+Workspace' },
       { '<leader>t', group = '+Telescope' },
       { '<leader>x', group = '+Trouble' },
       { '<leader>g', group = '+Git' },
+      { '<leader>c', group = '+Copy' },
     },
   },
 }

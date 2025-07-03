@@ -65,32 +65,6 @@ vim.keymap.set('n', '<leader>sd', '<cmd> Telescope diagnostics<cr>', { desc = 'D
 vim.keymap.set('n', '<leader>sr', '<cmd> Telescope resume<cr>', { desc = 'Resume' })
 vim.keymap.set('n', '<leader>s.', '<cmd> Telescope oldfiles<cr>', { desc = 'Recent Files ("." for repeat)' })
 
--- chatgpt keybinds
-vim.keymap.set('n', '<leader>c', '<cmd>ChatGPT<CR>', { desc = 'ChatGPT' })
-vim.keymap.set('n', '<leader>ce', '<cmd>ChatGPTEditWithInstruction<CR>', { desc = 'Edit with instruction' })
-vim.keymap.set('v', '<leader>ce', '<cmd>ChatGPTEditWithInstruction<CR>', { desc = 'Edit with instruction' })
-vim.keymap.set('n', '<leader>cg', '<cmd>ChatGPTRun grammar_correction<CR>', { desc = 'Grammar Correction' })
-vim.keymap.set('v', '<leader>cg', '<cmd>ChatGPTRun grammar_correction<CR>', { desc = 'Grammar Correction' })
-vim.keymap.set('n', '<leader>ct', '<cmd>ChatGPTRun translate<CR>', { desc = 'Translate' })
-vim.keymap.set('v', '<leader>ct', '<cmd>ChatGPTRun translate<CR>', { desc = 'Translate' })
-vim.keymap.set('n', '<leader>ck', '<cmd>ChatGPTRun keywords<CR>', { desc = 'Keywords' })
-vim.keymap.set('v', '<leader>ck', '<cmd>ChatGPTRun keywords<CR>', { desc = 'Keywords' })
-vim.keymap.set('n', '<leader>cd', '<cmd>ChatGPTRun docstring<CR>', { desc = 'Docstring' })
-vim.keymap.set('v', '<leader>cd', '<cmd>ChatGPTRun docstring<CR>', { desc = 'Docstring' })
-vim.keymap.set('n', '<leader>ca', '<cmd>ChatGPTRun add_tests<CR>', { desc = 'Add Tests' })
-vim.keymap.set('v', '<leader>ca', '<cmd>ChatGPTRun add_tests<CR>', { desc = 'Add Tests' })
-vim.keymap.set('v', '<leader>co', '<cmd>ChatGPTRun optimize_code<CR>', { desc = 'Optimize Code' })
-vim.keymap.set('n', '<leader>cs', '<cmd>ChatGPTRun summarize<CR>', { desc = 'Summarize' })
-vim.keymap.set('v', '<leader>cs', '<cmd>ChatGPTRun summarize<CR>', { desc = 'Summarize' })
-vim.keymap.set('n', '<leader>cf', '<cmd>ChatGPTRun fix_bugs<CR>', { desc = 'Fix Bugs' })
-vim.keymap.set('v', '<leader>cf', '<cmd>ChatGPTRun fix_bugs<CR>', { desc = 'Fix Bugs' })
-vim.keymap.set('n', '<leader>cx', '<cmd>ChatGPTRun explain_code<CR>', { desc = 'Explain Code' })
-vim.keymap.set('v', '<leader>cx', '<cmd>ChatGPTRun explain_code<CR>', { desc = 'Explain Code' })
-vim.keymap.set('n', '<leader>cr', '<cmd>ChatGPTRun roxygen_edit<CR>', { desc = 'Roxygen Edit' })
-vim.keymap.set('v', '<leader>cr', '<cmd>ChatGPTRun roxygen_edit<CR>', { desc = 'Roxygen Edit' })
-vim.keymap.set('n', '<leader>cl', '<cmd>ChatGPTRun code_readability_analysis<CR>', { desc = 'Code Readability Analysis' })
-vim.keymap.set('v', '<leader>cl', '<cmd>ChatGPTRun code_readability_analysis<CR>', { desc = 'Code Readability Analysis' })
-
 vim.keymap.set('n', '<leader>s/', function()
   require('telescope.builtin').live_grep {
     grep_open_files = true,
@@ -105,6 +79,25 @@ vim.keymap.set('n', '<leader>n', function()
     vim.wo.relativenumber = true
   end
 end, { desc = 'Toggle relative line numbers' })
+
+-- Copy current filename and path
+vim.keymap.set('n', '<Leader>cf', function()
+  local filename = vim.fn.expand '%:t'
+  vim.fn.setreg('+', filename)
+  vim.notify('Copied filename: ' .. filename)
+end, { desc = 'Copy current filename' })
+
+vim.keymap.set('n', '<Leader>cp', function()
+  local filepath = vim.fn.expand '%:p'
+  vim.fn.setreg('+', filepath)
+  vim.notify('Copied full path: ' .. filepath)
+end, { desc = 'Copy current full path' })
+
+vim.keymap.set('n', '<Leader>cr', function()
+  local relative_path = vim.fn.expand '%'
+  vim.fn.setreg('+', relative_path)
+  vim.notify('Copied relative path: ' .. relative_path)
+end, { desc = 'Copy current relative path' })
 
 vim.keymap.set('n', '<leader>sn', function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
