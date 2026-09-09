@@ -27,6 +27,22 @@ return {
         map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
         -- map('<leader>la', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
 
+        -- Show line diagnostics automatically in a floating window
+        vim.api.nvim_create_autocmd('CursorHold', {
+          buffer = event.buf,
+          callback = function()
+            vim.diagnostic.open_float(nil, {
+              focusable = false,
+              close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+              border = 'rounded',
+              source = 'always',
+              prefix = ' ',
+              scope = 'cursor',
+            })
+          end,
+        })
+
+
         -- Highlight word under cursor
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

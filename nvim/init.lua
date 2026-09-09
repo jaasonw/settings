@@ -21,6 +21,9 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
 vim.opt.pumheight = 10
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 1
@@ -31,13 +34,19 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+
+-- Automatically refresh file when modified
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { '*' },
 })
 
 -- the order for this crap actually matters as much as i would like to just put the theme at the top

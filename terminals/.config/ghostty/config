@@ -1,0 +1,20 @@
+# This is the configuration file for Ghostty.
+
+
+theme = Catppuccin Mocha
+font-family = "ComicCodeLigatures Nerd Font"
+font-size = 12
+
+window-width = 80
+window-height = 25
+
+keybind = global:super+grave_accent=new_tab
+keybind = ctrl+v=paste_from_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
+
+
+
+background-opacity = 0.9
+background-blur = 10
+
+gtk-single-instance = true

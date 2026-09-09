@@ -1,0 +1,38 @@
+KDE manual recreation notes
+===========================
+
+KDE configuration is intentionally not synced. Plasma files mix useful choices
+with monitor IDs, device state, recent paths, panel applet IDs, and occasionally
+application credentials. Recreate these settings through System Settings on a
+fresh machine instead of copying ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+or other whole KDE rc files.
+
+Current appearance to recreate
+-----------------------------
+- Color scheme: Catppuccin Mocha
+- Application style: Breeze
+- Icon theme: Tela-dark
+- Window decoration: Scratchy
+- Terminal: Ghostty with ComicCodeLigatures Nerd Font
+
+Panel/layout checklist
+----------------------
+1. Use the normal KDE panel with Kickoff, Icon Tasks, System Tray, Digital Clock,
+   Network, Volume, Battery, Bluetooth, Brightness, Clipboard, Notifications,
+   Media Controller, Weather, and System Monitor widgets.
+2. Add launchers for the applications you actually install. The old panel included
+   browsers, mail, Obsidian, Discord, Ghostty, Zed, Steam, Spotify, LocalSend,
+   Bitwarden, and System Settings.
+3. Recreate shortcuts through System Settings > Keyboard > Shortcuts. In
+   particular, choose your own launcher and emoji shortcuts instead of importing
+   machine-specific shortcut files.
+4. Optional third-party widgets previously present: KdeControlStation, Kara,
+   KDE Connect, and a personal Model Track widget. Install only widgets you trust;
+   do not import their saved configuration or credentials.
+
+Keep KDE state out of Git
+-------------------------
+Do not commit whole copies of these files: kdeglobals, kglobalshortcutsrc,
+plasma-org.kde.plasma.desktop-appletsrc, plasmanotifyrc, spectaclerc, or
+mimeapps.list. They are rewritten by Plasma and commonly contain stale device,
+path, application, or credential-specific state.

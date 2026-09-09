@@ -9,18 +9,18 @@ return {
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
       mode = '',
-      desc = '[F]ormat buffer',
+      desc = '[L]SP [F]ormat buffer',
     },
   },
   opts = {
     notify_on_error = false,
-    -- Disable format_on_save to prevent formatting on every save
     format_on_save = false,
     formatters_by_ft = {
       lua = { 'stylua' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      html = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      tex = { 'latexindent', stop_after_first = true },
     },
   },
 }

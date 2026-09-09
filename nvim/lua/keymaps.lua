@@ -102,3 +102,6 @@ end, { desc = 'Copy current relative path' })
 vim.keymap.set('n', '<leader>sn', function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = 'Config' })
+
+-- Diagnostics
+vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Show Diagnostic' })

@@ -8,6 +8,11 @@ return {
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
   config = function()
-    vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle position=float<CR>', { desc = 'Explorer' })
+    require('neo-tree').setup {
+      window = {
+        position = 'float',
+      },
+    }
+    vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<CR>', { desc = 'Explorer' })
   end,
 }

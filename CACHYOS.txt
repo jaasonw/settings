@@ -1,0 +1,24 @@
+CachyOS notes
+=============
+
+Fastfetch
+---------
+terminals/.config/fastfetch/config.jsonc is deliberately CachyOS/Arch-themed:
+- Arch logo
+- pacman-style package reporting
+- Nerd Font glyphs
+- Catppuccin-like blue/magenta/green/yellow presentation
+
+On CachyOS: install fastfetch, then run `fastfetch`. The config can be copied to
+~/.config/fastfetch/config.jsonc with ./sync.sh apply.
+
+On another distribution: Fastfetch still works, but the Arch logo and package
+count are not a good fit. Start with Fastfetch's default config or change
+`logo.source` from `arch_small` to your distro (or `auto`).
+
+Fish
+----
+fish/.config/fish/config.fish optionally loads CachyOS's fish integration only
+when /usr/share/cachyos-fish-config/cachyos-config.fish exists. Everywhere else
+it just disables the greeting. The Rust and `ghf` helpers are also guarded or
+home-relative, so they are safe on a non-CachyOS machine.
