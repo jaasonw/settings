@@ -22,6 +22,8 @@ and does not delete destination-only files.
 - `fish/` → a minimal Fish config plus optional CachyOS integration
 - `terminals/` → Ghostty, Fastfetch, and Rofi under `~/.config/`
 - `shell/.gitconfig` → `~/.gitconfig`
+- `agents/pi/` → portable `~/.pi/agent/` settings
+- `agents/claude/` → portable `~/.claude/` settings
 
 `terminals/.config/fastfetch/config.jsonc` is intentionally CachyOS/Arch-themed.
 See `CACHYOS.txt` and `KDE.txt` for manual recreation notes; KDE state/layouts,

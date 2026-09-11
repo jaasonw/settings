@@ -1,0 +1,22 @@
+{
+  "asyncByDefault": false,
+  "globalConcurrencyLimit": 4,
+  "maxActiveAsyncRunsPerSession": 3,
+  "maxSubagentSpawnsPerSession": 40,
+  "maxSubagentSpawnsPerRun": 12,
+  "parallel": {
+    "maxTasks": 6,
+    "concurrency": 4
+  },
+  "timeoutMs": 1800000,
+  "toolTimeoutMs": 600000,
+  "artifactDir": "session",
+  "authorityPolicy": {
+    "discardWorktree": "confirm",
+    "destructiveCleanup": "confirm",
+    "spawnBudgetGrant": "confirm",
+    "scheduleCreate": "confirm",
+    "stopRun": "auto",
+    "steerRun": "auto"
+  }
+}

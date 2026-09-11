@@ -1,3 +1,19 @@
 # machine-generated / machine-specific
 *.bak
 *_history
+
+# agent credentials and runtime state
+agents/pi/auth.json
+agents/pi/models*.json
+agents/pi/npm/
+agents/pi/sessions/
+agents/pi/missions/
+agents/pi/run-history.jsonl
+agents/pi/trust.json
+agents/claude/.credentials.json
+agents/claude/.claude.json
+agents/claude/cache/
+agents/claude/history.jsonl
+agents/claude/sessions/
+agents/claude/projects/
+agents/claude/plugins/
