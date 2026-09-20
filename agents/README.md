@@ -1,10 +1,12 @@
 # Agent settings
 
-`pi` and `claude` are optional sync modules:
+`pi`, `claude`, and `codex` are optional sync modules:
 
 ```sh
-./sync.sh apply pi claude
+./sync.sh apply pi claude codex
 ```
+
+`agents/pi/AGENTS.md` is canonical. Claude Code and Codex receive symlinks to the deployed Pi file.
 
 They contain only portable preferences, prompts, and hook configuration.
 Authenticate separately on every machine.
