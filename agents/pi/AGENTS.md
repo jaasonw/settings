@@ -27,3 +27,12 @@
 When initializing a project, find out what the standard or defacto standard formatter is for that language and apply it to the project and be sure to auto format before every commit
 
 - Follow repository formatting rules only; do not apply Pi-lens or other tool-specific formatting/autofixes unless the repository explicitly requires them
+
+## C++
+
+- Compile with clang/clang++ (and use clangd, clang-format, clang-tidy).
+- Target C++20; prefer C++20 features (concepts, ranges, `std::span`, designated init, `constexpr`) over older idioms or hand-rolled equivalents.
+- Format with Google style. Override only where a framework demands it (e.g. Qt's 4-space indent); put overrides in `.clang-format` so they are repo-wide, not ad hoc.
+- Set up strict linting up front: `.clang-tidy` with performance-*, readability-*, modernize-*, bugprone-*, cppcoreguidelines-*, clang-analyzer-*, and warnings as errors (`-Wall -Wextra -Wpedantic -Werror`).
+- Write memory-safe code by default: RAII, smart pointers or values over raw owning pointers, no manual new/delete, no raw pointer arithmetic, bounds-checked views (`std::span`, `.at()` at trust boundaries).
+- Build debug/CI with sanitizers (ASan + UBSan) enabled.
