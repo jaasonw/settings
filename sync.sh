@@ -100,6 +100,11 @@ sync_module() {
     local args=(-a --itemize-changes --backup --backup-dir="$BACKUP")
     ((DRY_RUN)) && args+=(-n)
     rsync "${args[@]}" "$source/" "$target/"
+    ((DRY_RUN)) && return
+    case "${NAMES[index]}" in
+      claude) ln -sfn ../.pi/agent/AGENTS.md "$target/CLAUDE.md" ;;
+      codex) ln -sfn ../.pi/agent/AGENTS.md "$target/AGENTS.md" ;;
+    esac
     return
   fi
 

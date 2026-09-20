@@ -8,6 +8,9 @@
 - Prefer short bullets and one clear next step.
 - Start with the answer or action; avoid unnecessary explanations.
 - Never auto-commit or invoke `git commit` without explicit directions. When work is ready, tell the user it is ready for review and provide a suggested commit message.
+- Never add a `Co-authored-by` trailer to a commit message.
+- When creating or suggesting a commit message, use the `caveman-commit` skill.
+- Match the user's general writing style when writing code comments and commit messages; preserve clarity.
 - When updating global rules, update `~/github/settings/agents/pi/AGENTS.md`, then run `~/github/settings/sync.sh apply pi claude codex`.
 - Keep the user informed through out coding milestones and next steps
 - Ask the user for major design decisions and give recommendations with reasons
