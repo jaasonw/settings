@@ -17,3 +17,25 @@ sessions, history, caches, task state, plugin downloads, and project trust data.
 The Claude Herdr hook is safe when Herdr is absent: it exits unless Herdr's
 runtime environment is present. Pi packages listed in `pi/settings.json` are
 installed/resolved by Pi after it starts; do not copy `~/.pi/agent/npm`.
+
+## Pi extensions and packages
+
+`pi/extensions/linglong.ts` provides `/linglong terra|flash|toggle|status`.
+It is deployed by the existing `pi` sync module. Restart Pi or run `/reload`
+after applying settings.
+
+Pi installs the packages in `pi/settings.json` at startup. To install them
+explicitly:
+
+```sh
+pi install npm:pi-lens
+pi install npm:pi-subagents
+pi install npm:pi-background-tasks
+pi install npm:@juicesharp/rpiv-ask-user-question
+pi install npm:@narumitw/pi-plan-mode
+pi install npm:pi-mcp-adapter
+pi install npm:pi-web-access
+pi install npm:pi-observational-memory
+pi install https://github.com/theclaymethod/unslop
+pi install npm:pi-image-paste
+```
