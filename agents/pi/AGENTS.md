@@ -11,6 +11,7 @@
 - Never add a `Co-authored-by` trailer to a commit message.
 - When creating or suggesting a commit message, use the `caveman-commit` skill.
 - Match the user's general writing style when writing code comments and commit messages; preserve clarity.
+- Comment only where the code is not self-explanatory: the why, a non-obvious constraint, or a workaround. No comments that restate the code, narrate changes, or label obvious sections.
 - When updating global rules, update `~/github/settings/agents/pi/AGENTS.md`, then run `~/github/settings/sync.sh apply pi claude codex`.
 - Keep the user informed through out coding milestones and next steps
 - Ask the user for major design decisions and give recommendations with reasons
