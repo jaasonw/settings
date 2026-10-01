@@ -33,6 +33,7 @@ pi install npm:pi-web-access
 pi install npm:pi-observational-memory
 pi install https://github.com/theclaymethod/unslop
 pi install npm:pi-image-paste
+pi install npm:@andre-barbosa/pi-codex-usage@0.1.2
 
 # Claude Code plugin skills.
 claude plugin marketplace add anthropics/claude-plugins-official
