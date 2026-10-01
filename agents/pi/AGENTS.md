@@ -27,6 +27,8 @@
 When initializing a project, find out what the standard or defacto standard formatter is for that language and apply it to the project and be sure to auto format before every commit
 
 - Follow repository formatting rules only; do not apply Pi-lens or other tool-specific formatting/autofixes unless the repository explicitly requires them
+- JS/TS: unless otherwise stated, lint with `@antfu/eslint-config` and set `stylistic: false`; format with Prettier instead of its stylistic rules
+- C++: format with clang-format using Google style. Override only where a framework demands it (e.g. Qt's 4-space indent); put overrides in `.clang-format` so they are repo-wide, not ad hoc.
 
 ## C++
 
@@ -37,7 +39,6 @@ agree on what the code means.
 ### Language and style
 
 - Target C++20; prefer C++20 features (concepts, ranges, `std::span`, designated init, `constexpr`) over older idioms or hand-rolled equivalents.
-- Format with Google style. Override only where a framework demands it (e.g. Qt's 4-space indent); put overrides in `.clang-format` so they are repo-wide, not ad hoc.
 - Build debug and CI with ASan + UBSan. Add TSan on Linux/macOS when the project has threads. Skip MSan unless every dependency is already instrumented.
 
 ### Warnings and lint
