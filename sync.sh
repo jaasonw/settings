@@ -93,18 +93,54 @@ parse_args() {
   ((${#SELECTED[@]})) || SELECTED=("${!NAMES[@]}")
 }
 
+link_rules() {
+  case "${NAMES[$1]}" in
+    claude) ln -sfn ../.pi/agent/AGENTS.md "$2/CLAUDE.md" ;;
+    codex) ln -sfn ../.pi/agent/AGENTS.md "$2/AGENTS.md" ;;
+  esac
+}
+
+# Fallback for hosts without rsync (stock Git Bash on Windows). Walks repo files only.
+copy_files() {
+  local repo=$1 home=$2 rel from to
+  while IFS= read -r -d '' rel; do
+    if [[ "$MODE" == apply ]]; then
+      from=$repo/$rel to=$home/$rel
+    else
+      from=$home/$rel to=$repo/$rel
+    fi
+    [[ -e "$from" ]] || continue
+    if [[ -e "$to" ]]; then
+      cmp -s "$from" "$to" && continue
+      echo "changed $rel"
+    else
+      echo "new $rel"
+    fi
+    ((DRY_RUN)) && continue
+    if [[ "$MODE" == apply && -e "$to" ]]; then
+      mkdir -p "$(dirname "$BACKUP/$rel")"
+      cp -p "$to" "$BACKUP/$rel"
+    fi
+    mkdir -p "$(dirname "$to")"
+    rm -f "$to"
+    cp -p "$from" "$to"
+  done < <(cd "$repo" && find . ! -type d -printf '%P\0')
+}
+
 sync_module() {
   local index=$1 source="$ROOT/${SOURCES[index]}" target="$HOME/${TARGETS[index]}" list
+  ((HAVE_RSYNC)) || {
+    copy_files "$source" "$target"
+    [[ "$MODE" == apply ]] && ((!DRY_RUN)) && link_rules "$index" "$target"
+    return 0
+  }
   if [[ "$MODE" == apply ]]; then
     mkdir -p "$target"
     local args=(-a --itemize-changes --backup --backup-dir="$BACKUP")
     ((DRY_RUN)) && args+=(-n)
     rsync "${args[@]}" "$source/" "$target/"
     ((DRY_RUN)) && return
-    case "${NAMES[index]}" in
-      claude) ln -sfn ../.pi/agent/AGENTS.md "$target/CLAUDE.md" ;;
-      codex) ln -sfn ../.pi/agent/AGENTS.md "$target/AGENTS.md" ;;
-    esac
+    link_rules "$index" "$target"
     return
   fi
 
@@ -119,9 +155,10 @@ sync_module() {
 
 load_modules
 parse_args "$@"
+HAVE_RSYNC=1
 command -v rsync >/dev/null 2>&1 || {
-  echo "sync.sh requires rsync." >&2
-  exit 1
+  HAVE_RSYNC=0
+  echo "rsync not found; using cp fallback." >&2
 }
 
 if [[ "$MODE" == apply && $DRY_RUN -eq 0 ]]; then

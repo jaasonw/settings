@@ -21,7 +21,7 @@ This repository stores portable dotfiles and agent settings. It is not an applic
 - When changing Pi packages, keep `agents/pi/settings.json`, `agents/install-skills.sh`, and the explicit install commands in `agents/README.md` consistent.
 - Change global agent rules in `agents/pi/AGENTS.md`, not this file. Deploy rule changes with `./sync.sh apply pi claude codex`.
 - Preview deployments with `./sync.sh apply --dry-run <module>`. Applying settings changes home files and backs up overwritten files; it does not delete destination-only files.
-- `sync.sh` requires Bash and rsync. Do not run the full installer or deploy unrelated modules merely to validate edits.
+- `sync.sh` requires Bash. It uses rsync when present and falls back to `cp` otherwise (e.g. Git Bash on Windows). Do not run the full installer or deploy unrelated modules merely to validate edits.
 - Put draft plans in a gitignored `plans/` directory.
 - Commit only when explicitly requested. Never add a `Co-authored-by` trailer.
 
