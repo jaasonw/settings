@@ -26,6 +26,13 @@ It installs public skills for every detected agent, syncs vendored local skills
 to `~/.agents/skills`, deploys Pi-only `subagent-models`, then installs Pi,
 Claude Code, and Codex packages/plugins.
 
+The installer includes `asd-ste100`, which the global agent rules require for
+every prompt. To install this skill separately:
+
+```sh
+npx --yes skills add danyuchn/asd-ste100-skill -g -a '*' -y -s asd-ste100
+```
+
 The Claude Herdr hook is safe when Herdr is absent: it exits unless Herdr's
 runtime environment is present. Pi packages listed in `pi/settings.json` are
 installed/resolved by Pi after it starts; do not copy `~/.pi/agent/npm`.

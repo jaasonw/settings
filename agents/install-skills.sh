@@ -14,6 +14,7 @@ npx --yes skills add Leonxlnx/taste-skill -g -a '*' -y -s \
   imagegen-frontend-mobile imagegen-frontend-web industrial-brutalist-ui \
   minimalist-ui redesign-existing-projects stitch-design-taste
 npx --yes skills add ayghri/i-have-adhd -g -a '*' -y
+npx --yes skills add danyuchn/asd-ste100-skill -g -a '*' -y -s asd-ste100
 npx --yes skills add dietrichgebert/ponytail -g -a '*' -y -s \
   ponytail ponytail-audit ponytail-debt ponytail-gain ponytail-help ponytail-review
 npx --yes skills add theclaymethod/unslop -g -a '*' -y
