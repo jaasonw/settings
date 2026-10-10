@@ -4,6 +4,7 @@
 - For every task, apply the `i-have-adhd` skill.
 - For every task, apply the `caveman` skill at **full** intensity.
 - For every task, apply the `unslop` skill.
+- For every prompt, apply the `asd-ste100` skill. Give its clarity rules priority when other style skills conflict.
 - Keep responses concise, structured, and action-oriented.
 - Prefer short bullets and one clear next step.
 - Start with the answer or action; avoid unnecessary explanations.
