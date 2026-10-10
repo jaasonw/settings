@@ -1,6 +1,6 @@
 # Personal agent defaults
 
-- For every coding task, apply Ponytail at **ultra** intensity.
+- For every coding task, apply Ponytail at **ultra** intensity, but never write `ponytail:` comments or any other Ponytail markers into code.
 - For every task, apply the `i-have-adhd` skill.
 - For every task, apply the `caveman` skill at **full** intensity.
 - For every task, apply the `unslop` skill.
