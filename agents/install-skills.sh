@@ -36,6 +36,10 @@ pi install https://github.com/theclaymethod/unslop
 pi install npm:pi-image-paste
 pi install npm:@andre-barbosa/pi-codex-usage@0.1.2
 
+# REA MCP registrations and matching workflow instructions.
+npx --yes rea-agents@6.4.0 setup --yes \
+  --client pi --client claude_code --client codex
+
 # Claude Code plugin skills.
 claude plugin marketplace add anthropics/claude-plugins-official
 claude plugin marketplace add ayghri/i-have-adhd
