@@ -24,6 +24,7 @@ and does not delete destination-only files.
 - `shell/.gitconfig` → `~/.gitconfig`
 - `agents/pi/` → portable `~/.pi/agent/` settings
 - `agents/claude/` → portable `~/.claude/` settings
+- `agents/opencode/` → portable `~/.config/opencode/` settings
 
 `terminals/.config/fastfetch/config.jsonc` is intentionally CachyOS/Arch-themed.
 See `CACHYOS.txt` and `KDE.txt` for manual recreation notes; KDE state/layouts,

@@ -97,6 +97,7 @@ link_rules() {
   case "${NAMES[$1]}" in
     claude) ln -sfn ../.pi/agent/AGENTS.md "$2/CLAUDE.md" ;;
     codex) ln -sfn ../.pi/agent/AGENTS.md "$2/AGENTS.md" ;;
+    opencode) ln -sfn ../../.pi/agent/AGENTS.md "$2/AGENTS.md" ;;
   esac
 }
 

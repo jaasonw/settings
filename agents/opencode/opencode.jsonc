@@ -1,0 +1,41 @@
+{
+  "model": "openai/gpt-6.1-sol#medium",
+  "skills": [
+    "~/.agents/skills",
+    "~/.pi/agent/skills",
+    "~/.pi/agent/npm/node_modules/pi-lens/skills",
+    "~/.pi/agent/npm/node_modules/pi-subagents/skills"
+  ],
+  "agents": {
+    "scout": {
+      "mode": "subagent",
+      "description": "Inspect repository code and return concise findings for another agent.",
+      "model": "openai/gpt-5.6-luna#low"
+    },
+    "worker": {
+      "mode": "subagent",
+      "description": "Implement a bounded coding task.",
+      "model": "openai/gpt-5.6-luna#medium"
+    },
+    "reviewer": {
+      "mode": "subagent",
+      "description": "Review changes for defects and regressions.",
+      "model": "openai/gpt-5.6-luna#high"
+    },
+    "oracle": {
+      "mode": "subagent",
+      "description": "Analyze difficult technical decisions.",
+      "model": "openai/gpt-6-astra#high"
+    },
+    "researcher": {
+      "mode": "subagent",
+      "description": "Research a bounded question and cite evidence.",
+      "model": "openai/gpt-5.6-luna#medium"
+    },
+    "delegate": {
+      "mode": "subagent",
+      "description": "Complete a bounded delegated task.",
+      "model": "openai/gpt-5.6-luna#medium"
+    }
+  }
+}

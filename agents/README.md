@@ -1,18 +1,39 @@
 # Agent settings
 
-`agent-skills`, `pi`, `claude`, and `codex` are optional sync modules:
+`agent-skills`, `pi`, `claude`, `codex`, and `opencode` are optional sync modules:
 
 ```sh
-./sync.sh apply agent-skills pi claude codex
+./sync.sh apply agent-skills pi claude codex opencode
 ```
 
-`agents/pi/AGENTS.md` is canonical. Claude Code and Codex receive symlinks to the deployed Pi file.
+`agents/pi/AGENTS.md` is canonical. Claude Code, Codex, and OpenCode receive symlinks to the deployed Pi file.
 
 They contain only portable preferences, prompts, and hook configuration.
 Authenticate separately on every machine.
 
 Excluded on purpose: OAuth/API credentials, model catalogs with provider keys,
 sessions, history, caches, task state, plugin downloads, and project trust data.
+
+## OpenCode
+
+Preview or apply OpenCode v2 preferences:
+
+```sh
+./sync.sh apply --dry-run opencode
+./sync.sh apply opencode
+```
+
+The module manages `opencode.jsonc` and `cli.json`. It shares Pi rules and
+skill directories, and stores matching model profiles. Model profiles are a
+snapshot, not an automatic conversion of Pi settings. Deploy `pi` and
+`agent-skills` too when setting up a new machine.
+
+OpenCode loads `opencode.jsonc` after `opencode.json`. Keep machine-specific
+MCP servers and provider settings in the unmanaged `opencode.json`.
+Applying this module preserves that file, service passwords, credentials,
+and chat history. Import only brings back the two managed preference files.
+Do not add credentials or local MCP paths to them. Pi extensions do not run
+in OpenCode. Restart OpenCode after applying settings.
 
 ## Skills
 
