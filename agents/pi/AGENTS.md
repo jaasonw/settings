@@ -17,7 +17,6 @@
 - Keep the user informed through out coding milestones and next steps
 - Ask the user for major design decisions and give recommendations with reasons
 - Before frontend visual-design work, prompt the user to choose a relevant installed design skill; recommend suitable options and use their selection.
-- Do the work directly; don't spawn subagents for engineering/QA/iteration unless explicitly asked to.
 - Avoid building sloppy software that assumes narrow use cases, assume it will be used by other people but don't over engineer solutions
 - Prioritize the solution that will have the highest performance and lowest memory footprint. Avoid writing code that will lag when possible
 - When choosing stack, prioritize high performance compiled languages where possible and attempt to minimize external dependencies. If it is somewhat trivial to implement a feature from a library and it is the only one we need from it then try to avoid importing

@@ -22,27 +22,27 @@
     "maxThinking": "high",
     "agentOverrides": {
       "scout": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai/gpt-6.1-terra",
         "thinking": "low"
       },
       "worker": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai/gpt-6.1-terra",
         "thinking": "medium"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai/gpt-6.1-sol",
         "thinking": "high"
       },
       "oracle": {
-        "model": "openai-codex/gpt-6-astra",
+        "model": "openai/gpt-6-astra",
         "thinking": "high"
       },
       "researcher": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai/gpt-6.1-terra",
         "thinking": "medium"
       },
       "delegate": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai/gpt-6.1-terra",
         "thinking": "medium"
       }
     }

@@ -80,9 +80,18 @@ paths into this repository. See [REA setup](https://github.com/morluto/rea/blob/
 
 ## Pi extensions and packages
 
-`pi/extensions/linglong.ts` provides `/linglong terra|flash|toggle|status`.
+`pi/extensions/linglong.ts` provides `/linglong china|openai|toggle|status`.
+Commands change the six subagent model overrides directly in user settings;
+they do not call a model or consume tokens. Thinking levels and the main chat
+model stay unchanged. `status` shows effective user/project model overrides;
+conflicting project model overrides block switches. Model availability and
+configured credentials are checked locally, not by making provider requests.
+The OpenAI profile requires `openai/gpt-6-astra` for the oracle; if that
+model is unavailable, the switch fails without changing settings.
+
 It is deployed by the existing `pi` sync module. Restart Pi or run `/reload`
-after applying settings.
+after applying settings. Run `node --test tests/linglong.test.mjs` to test the
+command without calling providers or changing live settings.
 
 Pi installs the packages in `pi/settings.json` at startup. To install them
 explicitly:

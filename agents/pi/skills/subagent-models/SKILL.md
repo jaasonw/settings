@@ -1,36 +1,37 @@
 ---
 name: subagent-models
-description: Toggle Pi builtin subagent models between DeepSeek Flash/Kimi K3 and OpenAI Codex GPT-5.6 Terra/GPT-6 Astra. Use when asked to switch, enable, disable, or show the Terra/Astra subagent profile.
+description: Explain the local /linglong command and its China and OpenAI subagent profiles. Use when asked to switch, enable, disable, or show either profile.
 license: MIT
-argument-hint: "[terra|flash|toggle|status]"
+argument-hint: "[china|openai|toggle|status]"
 ---
 
 # Subagent Models
 
-Manage only these builtin agents:
-
-| Agents | Flash profile | Terra profile |
-| --- | --- | --- |
-| `delegate`, `researcher`, `reviewer`, `scout`, `worker` | `openrouter/deepseek/deepseek-v4.1-flash` | `openai-codex/gpt-5.6-terra` |
-| `oracle` | `openrouter/moonshotai/kimi-k3` | `openai-codex/gpt-6-astra` |
+The `/linglong` command runs directly in `extensions/linglong.ts`. It does not send a prompt, call a model, or consume tokens. Use it even when the current provider has no quota.
 
 ## Commands
 
-- `/linglong terra`: apply Terra profile.
-- `/linglong flash`: restore Flash profile.
-- `/linglong toggle`: inspect, then switch to opposite complete profile. Mixed/unknown state switches to Terra.
-- `/linglong status`: show current model for six agents. No changes.
+- `/linglong china`: apply the China profile through OpenRouter.
+- `/linglong openai`: apply the OpenAI profile.
+- `/linglong toggle`: switch complete profiles. Mixed or unknown state switches to OpenAI.
+- `/linglong status`: show the six effective model overrides without changing settings.
 
-`/skill:subagent-models <mode>` remains available as direct fallback.
+| Agents | China profile | OpenAI profile |
+| --- | --- | --- |
+| `delegate`, `researcher`, `scout`, `worker` | `openrouter/~deepseek/deepseek-flash-latest` | `openai/gpt-6.1-terra` |
+| `reviewer` | `openrouter/z-ai/glm-5.3` | `openai/gpt-6.1-sol` |
+| `oracle` | `openrouter/moonshotai/kimi-k3.1-pro` | `openai/gpt-6-astra` |
 
-Natural-language requests for these profiles use same behavior. If no argument, ask whether to apply `terra` or `flash`; do not guess.
+The DeepSeek model ID includes a leading `~` in the installed Pi catalog.
 
-## Procedure
+## Behavior
 
-1. Call `subagent({ action: "list", capabilities: true })`. Confirm all six builtin agents exist and target OpenAI Codex models are available/authenticated when applying Terra.
-2. For `status`, report current model and stop.
-3. For `toggle`, compare all six current models against both profile tables. If all equal Flash, use Terra. Otherwise use Flash only when all equal Terra; use Terra for mixed/unknown state.
-4. Apply profile with one `subagent` management update per affected agent, using only `{ model: "provider/model" }`. Do not alter prompts, tools, thinking, aliases, or any other agent settings.
-5. Call `subagent({ action: "list", capabilities: true })` again. Report final model for all six agents and any failed update.
+- Change only model fields for these six agents in user settings.
+- Preserve thinking levels, prompts, tools, other agents, and the main chat model.
+- Check local model availability and configured credentials before writing. Do not make a provider request to test quota.
+- Refuse changes when a conflicting project model override would prevent the selected profile from taking effect.
+- Write the settings atomically. Do not edit extension or package files to switch profiles.
 
-Use user-scope defaults. Do not edit extension/package files directly. Do not change agents outside this table.
+For natural-language requests, direct the user to the corresponding `/linglong` command. If no profile is specified, ask whether to use `china` or `openai`. Do not use model-driven management calls as a substitute for this command. `/skill:subagent-models` explains the command; it does not execute a switch.
+
+Run `/reload` after installing or updating the extension.
