@@ -18,9 +18,9 @@ The `/linglong` command runs directly in `extensions/linglong.ts`. It does not s
 
 | Agents | China profile | OpenAI profile |
 | --- | --- | --- |
-| `delegate`, `researcher`, `scout`, `worker` | `openrouter/~deepseek/deepseek-flash-latest` | `openai/gpt-6.1-terra` |
-| `reviewer` | `openrouter/z-ai/glm-5.3` | `openai/gpt-6.1-sol` |
-| `oracle` | `openrouter/moonshotai/kimi-k3.1-pro` | `openai/gpt-6-astra` |
+| `delegate`, `researcher`, `scout`, `worker` | `openrouter/~deepseek/deepseek-flash-latest` | `openai-codex/gpt-6.1-terra` |
+| `reviewer` | `openrouter/z-ai/glm-5.3` | `openai-codex/gpt-6.1-sol` |
+| `oracle` | `openrouter/moonshotai/kimi-k3.1-pro` | `openai-codex/gpt-6-astra` |
 
 The DeepSeek model ID includes a leading `~` in the installed Pi catalog.
 

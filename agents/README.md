@@ -86,7 +86,7 @@ they do not call a model or consume tokens. Thinking levels and the main chat
 model stay unchanged. `status` shows effective user/project model overrides;
 conflicting project model overrides block switches. Model availability and
 configured credentials are checked locally, not by making provider requests.
-The OpenAI profile requires `openai/gpt-6-astra` for the oracle; if that
+The OpenAI profile requires `openai-codex/gpt-6-astra` for the oracle; if that
 model is unavailable, the switch fails without changing settings.
 
 It is deployed by the existing `pi` sync module. Restart Pi or run `/reload`

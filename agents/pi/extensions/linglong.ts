@@ -26,12 +26,12 @@ const PROFILES = {
     delegate: "openrouter/~deepseek/deepseek-flash-latest",
   },
   openai: {
-    scout: "openai/gpt-6.1-terra",
-    worker: "openai/gpt-6.1-terra",
-    reviewer: "openai/gpt-6.1-sol",
-    oracle: "openai/gpt-6-astra",
-    researcher: "openai/gpt-6.1-terra",
-    delegate: "openai/gpt-6.1-terra",
+    scout: "openai-codex/gpt-6.1-terra",
+    worker: "openai-codex/gpt-6.1-terra",
+    reviewer: "openai-codex/gpt-6.1-sol",
+    oracle: "openai-codex/gpt-6-astra",
+    researcher: "openai-codex/gpt-6.1-terra",
+    delegate: "openai-codex/gpt-6.1-terra",
   },
 } as const;
 

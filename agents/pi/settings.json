@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "1.4.0",
   "theme": "dark",
-  "defaultProvider": "openai",
+  "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "hideThinkingBlock": true,
   "packages": [
@@ -22,27 +22,27 @@
     "maxThinking": "high",
     "agentOverrides": {
       "scout": {
-        "model": "openai/gpt-6.1-terra",
+        "model": "openai-codex/gpt-6.1-terra",
         "thinking": "low"
       },
       "worker": {
-        "model": "openai/gpt-6.1-terra",
+        "model": "openai-codex/gpt-6.1-terra",
         "thinking": "medium"
       },
       "reviewer": {
-        "model": "openai/gpt-6.1-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "oracle": {
-        "model": "openai/gpt-6-astra",
+        "model": "openai-codex/gpt-6-astra",
         "thinking": "high"
       },
       "researcher": {
-        "model": "openai/gpt-6.1-terra",
+        "model": "openai-codex/gpt-6.1-terra",
         "thinking": "medium"
       },
       "delegate": {
-        "model": "openai/gpt-6.1-terra",
+        "model": "openai-codex/gpt-6.1-terra",
         "thinking": "medium"
       }
     }
