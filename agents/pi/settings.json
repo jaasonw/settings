@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.99.2",
+  "lastChangelogVersion": "1.4.0",
   "theme": "dark",
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "openai",
   "defaultModel": "gpt-6.1-sol",
   "hideThinkingBlock": true,
   "packages": [
@@ -46,5 +46,8 @@
         "thinking": "medium"
       }
     }
-  }
+  },
+  "extensions": [
+    "-builtin:mcp"
+  ]
 }
