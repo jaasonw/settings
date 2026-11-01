@@ -16,6 +16,14 @@ Modules are one line each in `modules.conf`; adding one needs no `sync.sh`
 changes. `apply` stores overwritten files under `~/.local/state/settings-backups/`
 and does not delete destination-only files.
 
+`--dry-run` shows destination paths, incoming sources, and unified content diffs.
+`-` lines show current destination content; `+` lines show incoming content.
+It labels new files, overwrites, symlink replacements, and missing sources.
+Binary files receive a difference notice instead of a text diff. Previews do not
+create directories or change files. They compare content and symlinks, not file
+permissions or timestamps. Diffs can expose local secrets; review output before
+sharing it.
+
 ## Managed settings
 
 - `nvim/` → `~/.config/nvim/`

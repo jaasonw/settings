@@ -101,6 +101,69 @@ link_rules() {
   esac
 }
 
+preview_file() {
+  local from=$1 to=$2 before=$2 status
+  if [[ -L "$from" ]]; then
+    if [[ -L "$to" && "$(readlink "$from")" == "$(readlink "$to")" ]]; then
+      return
+    fi
+    printf '\nSYMLINK %s\n  from: %s\n  target: %s\n' "$to" "$from" "$(readlink "$from")"
+    if [[ -e "$to" || -L "$to" ]]; then
+      printf '  replaces existing destination\n'
+    fi
+    return
+  fi
+  if [[ -f "$to" && ! -L "$to" ]] && cmp -s "$from" "$to"; then
+    return
+  fi
+  if [[ -e "$to" || -L "$to" ]]; then
+    printf '\nOVERWRITE %s\n  from: %s\n' "$to" "$from"
+    if [[ -L "$to" ]]; then
+      printf '  replaces symlink: %s\n' "$(readlink "$to")"
+    elif [[ ! -f "$to" ]]; then
+      printf '  conflict: destination is not a regular file\n'
+      return
+    fi
+  else
+    printf '\nCREATE %s\n  from: %s\n' "$to" "$from"
+  fi
+  [[ -f "$to" ]] || before=/dev/null
+  if diff -u --label "$to (current)" --label "$to (incoming)" "$before" "$from"; then
+    :
+  else
+    status=$?
+    [[ "$status" == 1 ]] || return "$status"
+  fi
+}
+
+preview_module() {
+  local index=$1 repo=$2 home=$3 rel from to rule='' link=''
+  while IFS= read -r -d '' rel; do
+    rel=${rel#./}
+    if [[ "$MODE" == apply ]]; then
+      from=$repo/$rel to=$home/$rel
+    else
+      from=$home/$rel to=$repo/$rel
+    fi
+    if [[ ! -e "$from" && ! -L "$from" ]]; then
+      printf '\nSKIP missing source: %s\n' "$from"
+      continue
+    fi
+    preview_file "$from" "$to"
+  done < <(cd "$repo" && find . \( -type f -o -type l \) -print0)
+  if [[ "$MODE" == apply ]]; then
+    case "${NAMES[index]}" in
+      claude) rule=CLAUDE.md link=../.pi/agent/AGENTS.md ;;
+      codex) rule=AGENTS.md link=../.pi/agent/AGENTS.md ;;
+      opencode) rule=AGENTS.md link=../../.pi/agent/AGENTS.md ;;
+    esac
+    if [[ -n "$rule" ]]; then
+      printf '\nFINAL SYMLINK %s/%s -> %s\n' "$home" "$rule" "$link"
+    fi
+  fi
+  printf '\nPreview only. Destination-only files are preserved.\n'
+}
+
 # Fallback for hosts without rsync (stock Git Bash on Windows). Walks repo files only.
 copy_files() {
   local repo=$1 home=$2 rel from to
@@ -130,6 +193,10 @@ copy_files() {
 
 sync_module() {
   local index=$1 source="$ROOT/${SOURCES[index]}" target="$HOME/${TARGETS[index]}" list
+  if ((DRY_RUN)); then
+    preview_module "$index" "$source" "$target"
+    return
+  fi
   ((HAVE_RSYNC)) || {
     copy_files "$source" "$target"
     [[ "$MODE" == apply ]] && ((!DRY_RUN)) && link_rules "$index" "$target"
